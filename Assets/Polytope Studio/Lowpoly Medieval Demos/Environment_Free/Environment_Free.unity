@@ -1796,7 +1796,6 @@ GameObject:
   - component: {fileID: 1589245844}
   - component: {fileID: 1589245843}
   - component: {fileID: 1589245846}
-  - component: {fileID: 1589245847}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1904,21 +1903,6 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1589245847
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1589245842}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae72b6f1e3947d54a8c65011ace25b70, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetObj: {fileID: 281138399}
-  cameraRotateSpeed: 200
-  maxLimit: 30
 --- !u!1001 &1590409431
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2729,8 +2713,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetObj: {fileID: 281138399}
-  cameraRotateSpeed: 200
+  cameraRotateSpeed: 80
   maxLimit: 45
+  minLimit: 25
 --- !u!1 &2129354786
 GameObject:
   m_ObjectHideFlags: 0

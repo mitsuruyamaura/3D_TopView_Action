@@ -2,41 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraController : MonoBehaviour
+public class CameraControllerFromCinemachine : MonoBehaviour
 {
     [Header("追跡するゲームオブジェクト")]
     public GameObject targetObj;
 
-    private Vector3 targetPos;                  // targetObj 変数のゲームオブジェクトの位置を記録する変数
+    [SerializeField]
+    private float cameraRotateSpeed = 80.0f;     // カメラの回転速度
 
     [SerializeField]
-    private float cameraRotateSpeed = 200f;     // カメラの回転速度
+    private float maxLimit = 45.0f;             // X 軸方向の可動範囲
 
     [SerializeField]
-    private float maxLimit = 30.0f;             // X 軸方向の可動範囲
+    private float minLimit = 25.0f;
 
-    private float minLimit;
-
-
-    void Start() {
-        // 追従対象(targetObj)の位置情報を取得
-        targetPos = targetObj.transform.position;
-
-        // X 軸の可動範囲の設定
-        minLimit = maxLimit - 25;
-    }
 
     void Update() {
-        //// 追従対象がいる場合
-        //if (targetObj != null) {
-
-        //    // カメラの位置を、追従対象の位置 - 補正値(targetPos)にして、一定距離離れて追従させる
-        //    transform.position += targetObj.transform.position - targetPos;
-
-        //    // 追従対象(targetObj)の位置情報を更新
-        //    targetPos = targetObj.transform.position;
-        //}
-
         if (Input.GetMouseButton(1)) {
             // カメラの回転
             RotateCamera();
@@ -62,11 +43,11 @@ public class CameraController : MonoBehaviour
         localAngle.x += z;
 
         // X 軸を稼働範囲内に収まるように制御
-        if (localAngle.x > maxLimit && localAngle.x < 180) {
+        if (localAngle.x > maxLimit) {
             localAngle.x = maxLimit;
         }
 
-        if (localAngle.x < minLimit) {  //  && localAngle.x > 180
+        if (localAngle.x < minLimit) {
             localAngle.x = minLimit;
         }
 
