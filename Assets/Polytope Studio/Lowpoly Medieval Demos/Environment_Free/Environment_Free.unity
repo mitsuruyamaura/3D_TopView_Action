@@ -736,6 +736,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e15553b3fba2de4fbe8e98cc71b08cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &281138406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 281138399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02b8204999eef7c4eae1e27884d69e04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpPower: 300
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &348962308
 GameObject:
   m_ObjectHideFlags: 0
@@ -1302,7 +1318,7 @@ GameObject:
   - component: {fileID: 1143006926}
   - component: {fileID: 1143006925}
   - component: {fileID: 1143006924}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1381,7 +1397,7 @@ GameObject:
   - component: {fileID: 1151806834}
   - component: {fileID: 1151806833}
   - component: {fileID: 1151806832}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}

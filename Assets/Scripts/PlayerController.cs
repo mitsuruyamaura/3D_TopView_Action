@@ -73,6 +73,8 @@ public class PlayerController : MonoBehaviour
 
             // ダッシュ有無に応じてアニメの再生速度を調整
             anim.SetFloat("Speed", isDash ? 2 : lookDirection.sqrMagnitude);
+
+            //Debug.Log(lookDirection.sqrMagnitude);
         } else {
             anim.SetFloat("Speed", 0);
         }
