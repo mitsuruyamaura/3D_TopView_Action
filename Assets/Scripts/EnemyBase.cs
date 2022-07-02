@@ -7,6 +7,9 @@ using DG.Tweening;
 // SpringJoint + DOTween
 // https://teratail.com/questions/270417
 
+// DOLookAt メソッド
+// https://qiita.com/BEATnonanka/items/b4cca6471e77466cec74
+
 [RequireComponent(typeof(Rigidbody))]
 public class EnemyBase : MonoBehaviour
 {
@@ -19,17 +22,14 @@ public class EnemyBase : MonoBehaviour
     [SerializeField]
     private EnemyAiState aiState = EnemyAiState.Wait;
 
-
     private Rigidbody rb;
-
-    [SerializeField]
     private Animator anim;
     private float stateTime = 2.0f;
-    private EnemyAiState nextState;
     private Tween tween;
 
 
-    private void Start() {     
+    private void Start() {
+        transform.parent.TryGetComponent(out anim);
 
         if (TryGetComponent(out rb)) {
             SetDestination();
@@ -38,17 +38,24 @@ public class EnemyBase : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 目標地点のセット
+    /// </summary>
     private void SetDestination() {
-        Vector3 destination = new( transform.position.x + Random.Range(-5.0f, 5.0f), transform.position.y, transform.position.z + Random.Range(-5.0f, 5.0f));
-        Debug.Log(destination.sqrMagnitude);
-        tween = rb.DOMove(destination, destination.sqrMagnitude / 1000).SetEase(Ease.InQuart).OnComplete(() => StartCoroutine(Wait()));
-        transform.parent.LookAt(destination);
+        Vector3 destination = new(transform.position.x + Random.Range(-5.0f, 5.0f), transform.position.y, transform.position.z + Random.Range(-5.0f, 5.0f));
+        //Debug.Log(destination.sqrMagnitude);
+        tween = rb.DOMove(destination, moveTime).SetEase(Ease.InQuart).OnComplete(() => StartCoroutine(Wait()));
+        transform.parent.DOLookAt(destination, 1.0f).SetEase(Ease.Linear);
         if (anim) {
             anim.SetFloat("Speed", destination.normalized.sqrMagnitude);
+            //Debug.Log(destination.normalized.sqrMagnitude);
         }
     }
 
-
+    /// <summary>
+    /// 待機
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator Wait() {
         anim.SetFloat("Speed", 0.0f);
         float timer = 0;
@@ -58,6 +65,8 @@ public class EnemyBase : MonoBehaviour
         }      
         tween.Kill();
         tween = null;
+
+        yield return new WaitForSeconds(stateTime);
         SetDestination();
     }
 }

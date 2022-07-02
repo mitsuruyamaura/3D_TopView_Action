@@ -1334,7 +1334,6 @@ MonoBehaviour:
   moveTime: 5
   shootDistance: 0
   aiState: 0
-  anim: {fileID: 1059686209}
 --- !u!4 &838781529
 Transform:
   m_ObjectHideFlags: 0
@@ -1630,12 +1629,6 @@ CapsuleCollider:
   m_Height: 0.5335765
   m_Direction: 1
   m_Center: {x: -0.002267599, y: 0.2583158, z: 2.8601253e-16}
---- !u!95 &1059686209 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 95131097399638280, guid: 57d78de69bcaf8a4e969c0c3350b859b,
-    type: 3}
-  m_PrefabInstance: {fileID: 1059686204}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1059686210 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4892504893775866, guid: 57d78de69bcaf8a4e969c0c3350b859b,
@@ -1655,7 +1648,7 @@ SpringJoint:
   m_AutoConfigureConnectedAnchor: 0
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   serializedVersion: 2
-  m_Spring: 10
+  m_Spring: 50
   m_Damper: 0.2
   m_MinDistance: 0
   m_MaxDistance: 0
