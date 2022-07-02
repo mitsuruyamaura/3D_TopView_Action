@@ -12,7 +12,6 @@ public class AttackPlayer : MonoBehaviour
         TryGetComponent(out anim);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetButtonDown("Fire1") && !anim.IsInTransition(0)) {
