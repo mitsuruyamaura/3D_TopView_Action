@@ -9,6 +9,9 @@ public class AttackPlayer : MonoBehaviour
     [SerializeField]
     private CapsuleCollider capsuleCol;
 
+    [SerializeField]
+    private TrailRenderer trailRenderer;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,5 +36,7 @@ public class AttackPlayer : MonoBehaviour
     private void SwitchWeaponCollider(int switchIndex) {
         capsuleCol.enabled = switchIndex == 0 ? true : false;
         Debug.Log(capsuleCol.enabled);
+
+        trailRenderer.enabled = switchIndex == 0 ? true : false;
     }
 }
