@@ -25,18 +25,17 @@ public class AttackPlayer : MonoBehaviour
         }
     }
 
-    public void Hit() {
-        
-    }
-
     /// <summary>
     /// AnimationEvent から実行
+    /// コライダーとトレイルのオンオフ切り替え
     /// </summary>
     /// <param name="switchIndex"></param>
     private void SwitchWeaponCollider(int switchIndex) {
+        // コライダーオンオフ切り替え
         capsuleCol.enabled = switchIndex == 0 ? true : false;
-        Debug.Log(capsuleCol.enabled);
+        //Debug.Log(capsuleCol.enabled);
 
+        // トレイルオンオフ切り替え
         trailRenderer.enabled = switchIndex == 0 ? true : false;
     }
 }
