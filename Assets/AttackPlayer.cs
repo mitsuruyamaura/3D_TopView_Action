@@ -13,7 +13,6 @@ public class AttackPlayer : MonoBehaviour
     [SerializeField]
     private TrailRenderer trailRenderer;
 
-    // Start is called before the first frame update
     void Start()
     {
         TryGetComponent(out anim);
