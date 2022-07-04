@@ -22,6 +22,7 @@ public class AttackPlayer : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1") && !anim.IsInTransition(0)) {
             anim.SetBool("Attack", true);
+            anim.SetFloat("Speed", 0.0f);
         }
     }
 
