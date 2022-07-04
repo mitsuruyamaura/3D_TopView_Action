@@ -22,10 +22,15 @@ public class EnemyBase : MonoBehaviour
     [SerializeField]
     private EnemyAiState aiState = EnemyAiState.Wait;
 
+    [SerializeField]
+    private EnemyData enemyData;
+
     private Rigidbody rb;
     private Animator anim;
     private float stateTime = 2.0f;
     private Tween tween;
+
+    private EnemyHealth enemyHealth;
 
 
     private void Start() {
@@ -35,6 +40,10 @@ public class EnemyBase : MonoBehaviour
             SetDestination();
         } else {
             Debug.Log("Rigidbody ‚ªæ“¾o—ˆ‚Ü‚¹‚ñB");
+        }
+
+        if (transform.parent.TryGetComponent(out enemyHealth)) {
+            enemyHealth.SetUpHp(enemyData.maxHp, anim);
         }
     }
 
@@ -68,5 +77,13 @@ public class EnemyBase : MonoBehaviour
 
         yield return new WaitForSeconds(stateTime);
         SetDestination();
+    }
+
+    /// <summary>
+    /// Hp ‚ÌŒvZˆ—‚Ì€”õ
+    /// </summary>
+    /// <param name="amount"></param>
+    public void PrepareCalcHp(int amount) {
+        enemyHealth.CalcHp(amount);
     }
 }

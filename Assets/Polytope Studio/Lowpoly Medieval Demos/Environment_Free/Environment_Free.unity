@@ -1296,6 +1296,7 @@ GameObject:
   - component: {fileID: 838781529}
   - component: {fileID: 838781527}
   - component: {fileID: 838781528}
+  - component: {fileID: 838781530}
   m_Layer: 0
   m_Name: Anchor
   m_TagString: Untagged
@@ -1334,6 +1335,14 @@ MonoBehaviour:
   moveTime: 5
   shootDistance: 0
   aiState: 0
+  enemyData:
+    id: 0
+    name: 
+    maxHp: 0
+    attackPower: 0
+    moveSpeed: 0
+    attackInterval: 0
+    attackRangeType: 0
 --- !u!4 &838781529
 Transform:
   m_ObjectHideFlags: 0
@@ -1349,6 +1358,19 @@ Transform:
   m_Father: {fileID: 1059686210}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &838781530
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 838781526}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0.45, z: 0}
 --- !u!4 &950742192 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1164602935277360391, guid: d90c349721b4e694fad80a76d87b2578,
@@ -1659,6 +1681,18 @@ SpringJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &1059686213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1059686205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61b38d7e12126f84e87c156a80bf8ddb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1067910503 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2ec966d90911a454c9760fa28789a4f8,
@@ -2301,6 +2335,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3927373128348799265, guid: d7f8469ee8bb93e4cab833992f350b82,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5809584952524848354, guid: d7f8469ee8bb93e4cab833992f350b82,
         type: 3}
       propertyPath: m_Parameters.widthMultiplier
@@ -2486,7 +2525,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1589245842}
   m_LocalRotation: {x: 0.3420201, y: 0, z: 0, w: 0.9396927}
-  m_LocalPosition: {x: 29.145018, y: 10.229821, z: 57.59208}
+  m_LocalPosition: {x: 29.14526, y: 10.229821, z: 57.59208}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3301,7 +3340,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 0.5006993, y: 1}
+    m_SensorSize: {x: 0.49999994, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -3318,7 +3357,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2101103842}
   m_LocalRotation: {x: 0.3420201, y: 0, z: 0, w: 0.9396927}
-  m_LocalPosition: {x: 29.145018, y: 10.229821, z: 57.59208}
+  m_LocalPosition: {x: 29.14526, y: 10.229821, z: 57.59208}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

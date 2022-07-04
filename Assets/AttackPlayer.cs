@@ -5,6 +5,7 @@ using UnityEngine;
 public class AttackPlayer : MonoBehaviour
 {
     private Animator anim;
+    private int attackPower;
 
     [SerializeField]
     private CapsuleCollider capsuleCol;
@@ -16,6 +17,9 @@ public class AttackPlayer : MonoBehaviour
     void Start()
     {
         TryGetComponent(out anim);
+
+        // TODO CharaData から貰う
+        attackPower = 1;
     }
 
     void Update()
@@ -39,5 +43,17 @@ public class AttackPlayer : MonoBehaviour
 
         // トレイルオンオフ切り替え
         trailRenderer.enabled = switchIndex == 0 ? true : false;
+    }
+
+
+    private void OnTriggerEnter(Collider col) {
+        if (!capsuleCol.enabled) {
+            return;
+        }
+
+        if (col.gameObject.TryGetComponent(out EnemyBase enemyBase)) {
+            enemyBase.PrepareCalcHp(-attackPower);
+            Debug.Log("攻撃ヒット");
+        }
     }
 }
