@@ -19,6 +19,8 @@ public class JumpPlayer : MonoBehaviour
     {
         TryGetComponent(out rb);
         TryGetComponent(out anim);
+
+        jumpPower = UserData.instance != null ? UserData.instance.currentCharaData.jumpPower : ConstData.DEFAULT_JUMP_POWER;
     }
 
     void Update()

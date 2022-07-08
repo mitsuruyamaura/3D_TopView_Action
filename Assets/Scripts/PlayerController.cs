@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
     void Start() {
         TryGetComponent(out rb);
         TryGetComponent(out anim);
+
+        moveSpeed = UserData.instance != null ? UserData.instance.currentCharaData.moveSpeed : ConstData.DEFAULT_MOVE_SPEED;
     }
 
     void Update() {
