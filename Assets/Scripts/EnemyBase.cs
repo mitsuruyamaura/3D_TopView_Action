@@ -31,6 +31,7 @@ public class EnemyBase : MonoBehaviour
     private Tween tween;
 
     private EnemyHealth enemyHealth;
+    private CharaData enemyCharaData;
 
 
     private void Start() {
@@ -85,5 +86,10 @@ public class EnemyBase : MonoBehaviour
     /// <param name="amount"></param>
     public void PrepareCalcHp(int amount) {
         enemyHealth.CalcHp(amount);
+    }
+
+
+    public CharaData GetEnemyCharaData() {
+        return enemyCharaData;
     }
 }

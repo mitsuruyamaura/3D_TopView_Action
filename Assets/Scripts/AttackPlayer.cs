@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class AttackPlayer : MonoBehaviour
 {
-    private Animator anim;
+    //private Animator anim;
+    private PlayerAnimation playerAnim;
+
     private int attackPower;
 
     [SerializeField]
@@ -15,17 +17,21 @@ public class AttackPlayer : MonoBehaviour
 
     void Start()
     {
-        TryGetComponent(out anim);
+        //TryGetComponent(out anim);
+        TryGetComponent(out playerAnim);
 
         // TODO CharaData ‚©‚ç–á‚¤
-        attackPower = 1;
+        attackPower = UserData.instance != null ? UserData.instance.currentCharaData.attackPower : ConstData.DEFAULT_ATTACK_POWER;
     }
 
     void Update()
     {
-        if (Input.GetButtonDown("Fire1") && !anim.IsInTransition(0)) {
-            anim.SetBool("Attack", true);
-            anim.SetFloat("Speed", 0.0f);
+        if (Input.GetButtonDown("Fire1") && !playerAnim.GetAnimator().IsInTransition(0)) {
+            //anim.SetBool("Attack", true);
+            //anim.SetFloat("Speed", 0.0f);
+
+            playerAnim.ChangeAnimationFromTrigger(AnimationState.Attack);
+            playerAnim.ChangeAnimationFromFloat(AnimationState.Speed, 0);
         }
     }
 
