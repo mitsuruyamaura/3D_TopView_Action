@@ -5,7 +5,9 @@ using UnityEngine;
 public class JumpPlayer : MonoBehaviour
 {
     private Rigidbody rb;
-    private Animator anim;
+    //private Animator anim;
+
+    private PlayerAnimation playerAnim;
 
     private bool isGrounded;
 
@@ -18,7 +20,9 @@ public class JumpPlayer : MonoBehaviour
     void Start()
     {
         TryGetComponent(out rb);
-        TryGetComponent(out anim);
+        //TryGetComponent(out anim);
+
+        TryGetComponent(out playerAnim);
 
         jumpPower = UserData.instance != null ? UserData.instance.currentCharaData.jumpPower : ConstData.DEFAULT_JUMP_POWER;
     }
@@ -45,8 +49,9 @@ public class JumpPlayer : MonoBehaviour
     private void Jump() {
         //isGrounded = false;
 
-        anim.SetTrigger("Jump");
+        //anim.SetTrigger("Jump");
 
+        playerAnim.ChangeAnimationFromTrigger(AnimationState.Jump);
         rb.AddForce(Vector3.up * jumpPower);
     }
 }

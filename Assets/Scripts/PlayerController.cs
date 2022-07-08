@@ -2,13 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// AnimationClip にタグを設定
+// https://gametukurikata.com/animationanimator/animatorstatetag
+
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
     private float horizontal;
     private float vertical;
     private Rigidbody rb;
-    private Animator anim;
+    //private Animator anim;
+    private PlayerAnimation playerAnim; 
 
     private Vector2 lookDirection = new Vector2(1, 0);
     private bool isDash;
@@ -19,12 +23,25 @@ public class PlayerController : MonoBehaviour
 
     void Start() {
         TryGetComponent(out rb);
-        TryGetComponent(out anim);
+        //TryGetComponent(out anim);
+
+        TryGetComponent(out playerAnim);
 
         moveSpeed = UserData.instance != null ? UserData.instance.currentCharaData.moveSpeed : ConstData.DEFAULT_MOVE_SPEED;
     }
 
     void Update() {
+
+        // Attack タグの設定されているアニメ再生中の場合
+        if (playerAnim.GetAnimator().GetCurrentAnimatorStateInfo(0).IsTag("Attack")) {
+            Debug.Log("移動停止。移動のキー入力停止");
+            // 移動停止。移動のキー入力停止
+            horizontal = 0;
+            vertical = 0;
+            rb.velocity = Vector3.zero;
+            return;
+        }
+
         // キー入力判定
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
@@ -74,11 +91,15 @@ public class PlayerController : MonoBehaviour
             //anim.SetFloat("Look Y", lookDirection.y);
 
             // ダッシュ有無に応じてアニメの再生速度を調整
-            anim.SetFloat("Speed", isDash ? 2 : lookDirection.sqrMagnitude);
+            //anim.SetFloat("Speed", isDash ? 2 : lookDirection.sqrMagnitude);
+
+            playerAnim.ChangeAnimationFromFloat(AnimationState.Speed, isDash ? 2 : lookDirection.sqrMagnitude);
 
             //Debug.Log(lookDirection.sqrMagnitude);
         } else {
-            anim.SetFloat("Speed", 0);
+            //anim.SetFloat("Speed", 0);
+
+            playerAnim.ChangeAnimationFromFloat(AnimationState.Speed, 0);
         }
     }
 }
