@@ -25,6 +25,7 @@ public class EnemyBase : MonoBehaviour
     /// <param name="gameManager"></param>
     public void SetUpEnemyBase(GameManager gameManager) {   // TODO エネミーのデータを貰う
         this.gameManager = gameManager;
+        TryGetComponent(out anim);
 
         if (transform.TryGetComponent(out enemyHealth)) {
             enemyHealth.SetUpHp(enemyData.maxHp, anim);

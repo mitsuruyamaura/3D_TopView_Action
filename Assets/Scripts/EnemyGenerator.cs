@@ -11,6 +11,11 @@ public class EnemyGenerator : MonoBehaviour
     private Transform[] generateTrans;
 
     private bool isGenerateEnd;
+    private GameManager gameManager;
+
+    private void Start() {
+        TryGetComponent(out gameManager);
+    }
 
     /// <summary>
     /// エネミーの生成
@@ -21,6 +26,7 @@ public class EnemyGenerator : MonoBehaviour
         EnemyBase enemy = Instantiate(enemyPrefab, generateTrans[Random.Range(0, generateTrans.Length)].position, Quaternion.identity);
 
         // TODO EnemyBase の SetUp する
+        enemy.SetUpEnemyBase(gameManager);
 
         return enemy;
     }

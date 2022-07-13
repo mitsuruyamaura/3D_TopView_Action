@@ -45,7 +45,6 @@ public class GameManager : MonoBehaviour
         Debug.Log("エネミーの生成終了");
     }
 
-    
     /// <summary>
     /// エネミーの倒された数を監視
     /// </summary>
