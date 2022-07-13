@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
             if (generateInterval <= timer) {
                 timer = 0;
                 enemyGenerateCount++;
+                enemyGenerator.GenerateEnemy();
             }           
             yield return null;
         }
@@ -58,5 +59,12 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
         Debug.Log("ゲームクリア");
+    }
+
+    /// <summary>
+    /// エネミーの倒した数を加算
+    /// </summary>
+    public void AddDestroyEnemyCount() {
+        destroyEnemyCount++;
     }
 }
