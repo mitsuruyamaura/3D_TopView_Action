@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
 
         // Attack タグの設定されているアニメ再生中の場合
         if (playerAnim.GetAnimator().GetCurrentAnimatorStateInfo(0).IsTag("Attack")) {
-            Debug.Log("移動停止。移動のキー入力停止");
+            //Debug.Log("移動停止。移動のキー入力停止");
             // 移動停止。移動のキー入力停止
             horizontal = 0;
             vertical = 0;

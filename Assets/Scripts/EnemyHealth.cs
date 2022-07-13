@@ -19,10 +19,10 @@ public class EnemyHealth : MonoBehaviour
     }
 
     /// <summary>
-    /// Hp の計算
+    /// Hp の計算と生存確認
     /// </summary>
     /// <param name="amount"></param>
-    public void CalcHp(int amount) {
+    public bool CalcHp(int amount) {
         //hp = Mathf.Min(hp + amount, enemyData.maxHp);
 
         hp += amount;
@@ -38,7 +38,7 @@ public class EnemyHealth : MonoBehaviour
             // エフェクト
 
             // SE
-
+            return true;
         } else {
             anim.SetTrigger("Damage");
 
@@ -46,8 +46,7 @@ public class EnemyHealth : MonoBehaviour
 
             // SE
 
+            return false;
         }
-
-        // 共通の処理
     }
 }
