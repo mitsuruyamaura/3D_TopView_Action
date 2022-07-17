@@ -3512,6 +3512,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SlimeRabbit_Prefab
       objectReference: {fileID: 0}
+    - target: {fileID: 2641491944515610799, guid: 36d1378773478304f8cf843488e050e9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2647934582513781095, guid: 36d1378773478304f8cf843488e050e9,
         type: 3}
       propertyPath: m_RootOrder
