@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine.PostFX;
+using UnityEngine.Rendering.PostProcessing;
 
 // AnimationClip にタグを設定
 // https://gametukurikata.com/animationanimator/animatorstatetag
@@ -20,12 +22,24 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float moveSpeed;
 
+    [SerializeField]
+    private CinemachinePostProcessing postProcessing;
+
+    private Vignette vignette;
+
 
     void Start() {
         TryGetComponent(out rb);
         //TryGetComponent(out anim);
 
         TryGetComponent(out playerAnim);
+
+        // 通常の取得方法
+        //vignette = postProcessing.m_Profile.GetSetting<Vignette>();
+
+        if (!postProcessing.m_Profile.TryGetSettings(out vignette)) {
+            Debug.Log("Vignette 取得出来ません。");
+        } 
 
         moveSpeed = UserData.instance != null ? UserData.instance.currentCharaData.moveSpeed : ConstData.DEFAULT_MOVE_SPEED;
     }
@@ -45,6 +59,12 @@ public class PlayerController : MonoBehaviour
         // キー入力判定
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
+
+        isDash = Input.GetKey(KeyCode.LeftShift);
+
+        if (vignette) {
+            vignette.intensity.value = isDash ? 0.5f : 0;
+        }
     }
 
     void FixedUpdate() {
@@ -66,8 +86,10 @@ public class PlayerController : MonoBehaviour
         // 方向キーの入力値とカメラの向きから、移動方向を決定
         Vector3 moveForward = cameraForward * vertical + Camera.main.transform.right * horizontal;
 
+        float speed = isDash ? moveSpeed * 2.0f : moveSpeed;
+
         // 移動方向にスピードを掛ける。ジャンプや落下がある場合は、別途Y軸方向の速度ベクトルを足す。
-        rb.velocity = moveForward * moveSpeed + new Vector3(0, rb.velocity.y, 0);
+        rb.velocity = moveForward * speed + new Vector3(0, rb.velocity.y, 0);
 
         // キャラクターの向きを進行方向に
         if (moveForward != Vector3.zero) {
@@ -101,5 +123,10 @@ public class PlayerController : MonoBehaviour
 
             playerAnim.ChangeAnimationFromFloat(AnimationState.Speed, 0);
         }
+    }
+
+
+    private void OnDisable() {
+        vignette.intensity.value = 0;
     }
 }
