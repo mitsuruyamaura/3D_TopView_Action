@@ -10,7 +10,11 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private float generateInterval;
 
+    [SerializeField]
+    private int generateGemCount;
+
     private EnemyGenerator enemyGenerator;
+    private GemGenerator gemGenerator;
 
     private int enemyGenerateCount;
 
@@ -22,7 +26,11 @@ public class GameManager : MonoBehaviour
         if(TryGetComponent(out enemyGenerator)) {
             StartCoroutine(PrepareGenerateEnemy());
             StartCoroutine(ObserveEnemyCount());
-        }        
+        }
+
+        if (TryGetComponent(out gemGenerator)) {
+            gemGenerator.GenerateGems(generateGemCount);
+        }
     }
 
     /// <summary>

@@ -16,12 +16,15 @@ MonoBehaviour:
   - id: 0
     gemType: 0
     point: 10
-    gemPrefab: {fileID: 0}
+    gemPrefab: {fileID: 1599669697516503906, guid: c8d4b4d34c9ded0488abb596aae3485a,
+      type: 3}
   - id: 0
     gemType: 1
     point: 20
-    gemPrefab: {fileID: 0}
+    gemPrefab: {fileID: 1121632745676479744, guid: b8fe00c2d19a6be4088d82d60f279400,
+      type: 3}
   - id: 0
     gemType: 2
     point: 30
-    gemPrefab: {fileID: 0}
+    gemPrefab: {fileID: 4247446371993356672, guid: a8a904b8de13c114f9e5076252f4b426,
+      type: 3}
