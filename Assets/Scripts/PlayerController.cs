@@ -65,6 +65,9 @@ public class PlayerController : MonoBehaviour
         if (vignette) {
             vignette.intensity.value = isDash ? 0.5f : 0;
         }
+
+        // 移動する方向と移動アニメの同期
+        SyncMoveAnimation();
     }
 
     void FixedUpdate() {
@@ -95,9 +98,6 @@ public class PlayerController : MonoBehaviour
         if (moveForward != Vector3.zero) {
             transform.rotation = Quaternion.LookRotation(moveForward);
         }
-
-        // 移動する方向と移動アニメの同期
-        SyncMoveAnimation();
     }
 
     /// <summary>
@@ -122,6 +122,11 @@ public class PlayerController : MonoBehaviour
             //anim.SetFloat("Speed", 0);
 
             playerAnim.ChangeAnimationFromFloat(AnimationState.Speed, 0);
+            Debug.Log("停止");
+
+            //if (!playerAnim.GetAnimator().GetCurrentAnimatorStateInfo(0).IsName("Idle") || !playerAnim.GetAnimator().GetCurrentAnimatorStateInfo(0).IsName("Locomotion")) {
+            //    playerAnim.ChangeAnimationFromTrigger(AnimationState.Idle);
+            //}
         }
     }
 

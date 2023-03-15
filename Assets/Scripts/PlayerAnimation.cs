@@ -9,7 +9,8 @@ public enum AnimationState {
     Damage,
     Jump,
     Speed,
-
+    Idle,
+    Clear
 }
 
 public class PlayerAnimation : MonoBehaviour {

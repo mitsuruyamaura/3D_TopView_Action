@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class JumpPlayer : MonoBehaviour
+public class PlayerJump : MonoBehaviour
 {
     private Rigidbody rb;
     //private Animator anim;
