@@ -10,6 +10,9 @@ public class DataBaseManager : MonoBehaviour
     [SerializeField]
     private CharaDataSO charaDataSo;
 
+    [SerializeField] 
+    private SkinDataSO skinDataSo;
+
     
     void Awake() {
         if (instance == null) {
@@ -28,5 +31,14 @@ public class DataBaseManager : MonoBehaviour
     /// <returns></returns>
     public CharaData GetCharaData(int searchId) {
         return charaDataSo.charaDataList.Find(x => x.id == searchId);
+    }
+
+    /// <summary>
+    /// ID で指定したキャラ・プレファブの取得
+    /// </summary>
+    /// <param name="searchId"></param>
+    /// <returns></returns>
+    public PlayerController GetSkinData(int searchId) {
+        return skinDataSo.skinDataList.Find(x => x.id == searchId).charaPrefab;
     }
 }
