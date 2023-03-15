@@ -13,6 +13,12 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private int generateGemCount;
 
+    [SerializeField] 
+    private PlayerController playerChara;
+    
+    [SerializeField] 
+    private Transform startTran;
+    
     private EnemyGenerator enemyGenerator;
     private GemGenerator gemGenerator;
 
@@ -31,10 +37,14 @@ public class GameManager : MonoBehaviour
         if (TryGetComponent(out gemGenerator)) {
             gemGenerator.GenerateGems(generateGemCount);
         }
+
+        UserData.instance.SetCurrentCharaData();
+        playerChara = Instantiate(DataBaseManager.instance.GetSkinData(UserData.instance.currentCharaData.id),
+            startTran.position, Quaternion.identity);
     }
 
     /// <summary>
-    /// ƒGƒlƒ~[‚Ì¶¬€”õ
+    /// ï¿½Gï¿½lï¿½~ï¿½[ï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     /// </summary>
     /// <returns></returns>
     private IEnumerator PrepareGenerateEnemy() {
@@ -50,26 +60,26 @@ public class GameManager : MonoBehaviour
             }           
             yield return null;
         }
-        Debug.Log("ƒGƒlƒ~[‚Ì¶¬I—¹");
+        Debug.Log("ï¿½Gï¿½lï¿½~ï¿½[ï¿½Ìï¿½ï¿½ï¿½ï¿½Iï¿½ï¿½");
     }
 
     /// <summary>
-    /// ƒGƒlƒ~[‚Ì“|‚³‚ê‚½”‚ğŠÄ‹
+    /// ï¿½Gï¿½lï¿½~ï¿½[ï¿½Ì“|ï¿½ï¿½ï¿½ê‚½ï¿½ï¿½ï¿½ï¿½ï¿½Äï¿½
     /// </summary>
     /// <returns></returns>
     private IEnumerator ObserveEnemyCount() {
 
         while (maxEnemyGenerateCount > destroyEnemyCount) {
 
-            // TODO ƒQ[ƒ€ƒXƒe[ƒg‚É‚æ‚éˆê’â~‹@”\‚ğ’Ç‰Á
+            // TODO ï¿½Qï¿½[ï¿½ï¿½ï¿½Xï¿½eï¿½[ï¿½gï¿½É‚ï¿½ï¿½êï¿½ï¿½~ï¿½@ï¿½\ï¿½ï¿½Ç‰ï¿½
 
             yield return null;
         }
-        Debug.Log("ƒQ[ƒ€ƒNƒŠƒA");
+        Debug.Log("ï¿½Qï¿½[ï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½A");
     }
 
     /// <summary>
-    /// ƒGƒlƒ~[‚Ì“|‚µ‚½”‚ğ‰ÁZ
+    /// ï¿½Gï¿½lï¿½~ï¿½[ï¿½Ì“|ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Z
     /// </summary>
     public void AddDestroyEnemyCount() {
         destroyEnemyCount++;

@@ -9,7 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc532a4d74e78e8488dcf1babd495ee8, type: 3}
-  m_Name: CharaDataSO
+  m_Script: {fileID: 11500000, guid: 30ec740cdf724164392a05a5d44431be, type: 3}
+  m_Name: SkinDataSO
   m_EditorClassIdentifier: 
-  charaDataList: []
+  skinDataList:
+  - id: 0
+    charaPrefab: {fileID: 281138400, guid: e8c8754945983b84c9b2498736fb4109, type: 3}
