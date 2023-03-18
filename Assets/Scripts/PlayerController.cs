@@ -28,7 +28,15 @@ public class PlayerController : MonoBehaviour
     private Vignette vignette;
 
 
-    void Start() {
+    /// <summary>
+    /// 初期設定
+    /// </summary>
+    /// <param name="camera"></param>
+    public void SetUpPlayer(CameraControllerFromCinemachine camera) {
+
+        camera.TryGetComponent(out postProcessing);
+        //postProcessing = camera.GetComponent<CinemachinePostProcessing>();
+
         TryGetComponent(out rb);
         //TryGetComponent(out anim);
 
@@ -43,8 +51,26 @@ public class PlayerController : MonoBehaviour
 
         moveSpeed = UserData.instance != null ? UserData.instance.currentCharaData.moveSpeed : ConstData.DEFAULT_MOVE_SPEED;
     }
+    
+    // void Start() {
+    //     TryGetComponent(out rb);
+    //     //TryGetComponent(out anim);
+    //
+    //     TryGetComponent(out playerAnim);
+    //
+    //     // 通常の取得方法
+    //     //vignette = postProcessing.m_Profile.GetSetting<Vignette>();
+    //
+    //     if (!postProcessing.m_Profile.TryGetSettings(out vignette)) {
+    //         Debug.Log("Vignette 取得出来ません。");
+    //     } 
+    //
+    //     moveSpeed = UserData.instance != null ? UserData.instance.currentCharaData.moveSpeed : ConstData.DEFAULT_MOVE_SPEED;
+    // }
 
     void Update() {
+        
+        if(!playerAnim) return;
 
         // Attack タグの設定されているアニメ再生中の場合
         if (playerAnim.GetAnimator().GetCurrentAnimatorStateInfo(0).IsTag("Attack")) {
@@ -72,6 +98,8 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate() {
 
+        if (!rb) return;
+        
         // 向きを考慮しない移動方法。移動方向にスピードを掛ける。ジャンプや落下がある場合は、別途Y軸方向の速度ベクトルを足す。
         //rb.velocity = new (inputHorizontal * moveSpeed, rb.velocity.y, inputVertical * moveSpeed);
 

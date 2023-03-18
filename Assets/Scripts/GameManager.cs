@@ -18,6 +18,9 @@ public class GameManager : MonoBehaviour
     
     [SerializeField] 
     private Transform startTran;
+
+    [SerializeField] 
+    private CameraControllerFromCinemachine cameraController;
     
     private EnemyGenerator enemyGenerator;
     private GemGenerator gemGenerator;
@@ -41,6 +44,10 @@ public class GameManager : MonoBehaviour
         UserData.instance.SetCurrentCharaData();
         playerChara = Instantiate(DataBaseManager.instance.GetSkinData(UserData.instance.currentCharaData.id),
             startTran.position, Quaternion.identity);
+        
+        playerChara.SetUpPlayer(cameraController);
+        
+        cameraController.SetTarget(playerChara.gameObject);
     }
 
     /// <summary>

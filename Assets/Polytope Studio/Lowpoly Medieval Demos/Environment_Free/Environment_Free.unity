@@ -2818,6 +2818,7 @@ MonoBehaviour:
   generateGemCount: 20
   playerChara: {fileID: 0}
   startTran: {fileID: 1615368604}
+  cameraController: {fileID: 2101103845}
 --- !u!114 &1816170732
 MonoBehaviour:
   m_ObjectHideFlags: 0

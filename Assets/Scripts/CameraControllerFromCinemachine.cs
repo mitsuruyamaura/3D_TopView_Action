@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 
 public class CameraControllerFromCinemachine : MonoBehaviour
@@ -53,5 +54,18 @@ public class CameraControllerFromCinemachine : MonoBehaviour
 
         // ƒJƒƒ‰‚Ì‰ñ“]
         transform.localEulerAngles = localAngle;
+    }
+
+    /// <summary>
+    /// ’ÇÕ‘ÎÛ‚ğİ’è
+    /// </summary>
+    /// <param name="target"></param>
+    public void SetTarget(GameObject target) {
+        targetObj = target;
+
+        if (TryGetComponent(out CinemachineVirtualCamera camera)) {
+            camera.Follow = targetObj.transform;    
+        }
+        //GetComponent<CinemachineVirtualCamera>().Follow = targetObj.transform;
     }
 }
