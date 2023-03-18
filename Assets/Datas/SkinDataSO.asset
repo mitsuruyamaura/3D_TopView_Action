@@ -15,3 +15,5 @@ MonoBehaviour:
   skinDataList:
   - id: 0
     charaPrefab: {fileID: 281138400, guid: e8c8754945983b84c9b2498736fb4109, type: 3}
+  - id: 1
+    charaPrefab: {fileID: 281138400, guid: e8c8754945983b84c9b2498736fb4109, type: 3}

@@ -28,10 +28,14 @@ public class PlayerController : MonoBehaviour
     private Vignette vignette;
 
 
-
+    /// <summary>
+    /// èâä˙ê›íË
+    /// </summary>
+    /// <param name="camera"></param>
     public void SetUpPlayer(CameraControllerFromCinemachine camera) {
 
-        postProcessing = camera.GetComponent<CinemachinePostProcessing>();
+        camera.TryGetComponent(out postProcessing);
+        //postProcessing = camera.GetComponent<CinemachinePostProcessing>();
 
         TryGetComponent(out rb);
         //TryGetComponent(out anim);

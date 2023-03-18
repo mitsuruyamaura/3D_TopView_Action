@@ -62,6 +62,10 @@ public class CameraControllerFromCinemachine : MonoBehaviour
     /// <param name="target"></param>
     public void SetTarget(GameObject target) {
         targetObj = target;
-        GetComponent<CinemachineVirtualCamera>().Follow = targetObj.transform;
+
+        if (TryGetComponent(out CinemachineVirtualCamera camera)) {
+            camera.Follow = targetObj.transform;    
+        }
+        //GetComponent<CinemachineVirtualCamera>().Follow = targetObj.transform;
     }
 }
