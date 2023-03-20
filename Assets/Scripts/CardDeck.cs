@@ -5,10 +5,10 @@ public class CardDeck
 {
     private ReactiveCollection<int> cards = new ();
 
-    public CardDeck()
+    public CardDeck(int cardCount)
     {
         // カードのデッキを初期化する
-        for (int i = 0; i < 52; i++)
+        for (int i = 0; i < cardCount; i++)
         {
             cards.Add(i + 1);
         }
