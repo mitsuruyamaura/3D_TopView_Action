@@ -14,14 +14,17 @@ public class ATBPresenter : MonoBehaviour
 
     private void Awake()
     {
-        TryGetComponent(out view);
+        if(!TryGetComponent(out view)) return;
         
         // 通常のクラスの場合
         model = new ATBModel(maxATB, recoveryRate, attackThreshold);
+        Debug.Log("Model 初期設定完了");
         
         // MonoBehaviour 継承クラスの場合
-        if(!TryGetComponent(out model)) return;
+        if(!TryGetComponent(out modelMono)) return;
         modelMono.SetTriggerATB(maxATB, recoveryRate, attackThreshold);
+        
+        Debug.Log("クラスの取得・初期設定完了");
     }
 
     private void Start()
@@ -29,13 +32,13 @@ public class ATBPresenter : MonoBehaviour
         // 攻撃ボタンがクリックされたらATB値をリセットする
         view.OnAttackButtonClick
             .Subscribe(_ => model.ResetATB())
-            .AddTo(view);
+            .AddTo(this);
 
         // 攻撃ボタンの状態を更新するストリーム
         model.CurrentATB
             .Select(atb => atb >= model.AttackThreshold)
             .SubscribeToInteractable(view.AttackButton)
-            .AddTo(view);
+            .AddTo(this);
 
         // ATBゲージの表示を更新するストリーム
         model.CurrentATB
@@ -45,6 +48,8 @@ public class ATBPresenter : MonoBehaviour
             //     var fillAmount = atb / model.MaxATB;
             //     view.AtbGauge.DOFillAmount(fillAmount, 0.05f).SetEase(Ease.Linear);
             // })
-            .AddTo(view);
+            .AddTo(this);
+        
+        Debug.Log("ストリームの設定完了");
     }
 }
