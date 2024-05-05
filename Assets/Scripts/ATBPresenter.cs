@@ -43,10 +43,12 @@ public class ATBPresenter : MonoBehaviour
         // ATBゲージの表示を更新するストリーム
         model.CurrentATB
             .Subscribe(atb => view.AtbGauge.fillAmount = atb / model.MaxATB)
+            
+            // DOTween の場合。こちらも正常に動作する
             // .Subscribe(atb =>
             // {
             //     var fillAmount = atb / model.MaxATB;
-            //     view.AtbGauge.DOFillAmount(fillAmount, 0.05f).SetEase(Ease.Linear);
+            //     view.AtbGauge.DOFillAmount(fillAmount, 0.01f).SetEase(Ease.Linear);
             // })
             .AddTo(this);
         

@@ -6,57 +6,67 @@ using DG.Tweening;
 // SpringJoint + DOTween
 // https://teratail.com/questions/270417
 
-// DOLookAt メソッド
+// DOLookAt ???\?b?h
 // https://qiita.com/BEATnonanka/items/b4cca6471e77466cec74
 
 public class EnemyMove : MonoBehaviour
 {
     [SerializeField]
-    private float moveTime;
+    private float moveTime = 5.0f;
 
     private Rigidbody rb;
     private Animator anim;
     private float stateTime = 2.0f;
     private Tween tween;
+    private string speedParam = "Speed";
 
 
     private void Start() {
-        transform.parent.TryGetComponent(out anim);
+        if(!transform.parent.TryGetComponent(out anim)) {
+            Debug.Log("親オブジェクトの Animator が取得できません");
+        }
 
-        // TODO SetUp に変えて、MoveSpeed や Animator を受け取るようにする
+        // TODO SetUp ??????AMoveSpeed ?? Animator ????????????
 
         if (TryGetComponent(out rb)) {
             SetDestination();
         } else {
-            Debug.Log("Rigidbody が取得出来ません。");
+            Debug.Log("Rigidbody が取得できません");
         }
     }
 
     /// <summary>
-    /// 目標地点のセット
+    /// ??W?n?_??Z?b?g
     /// </summary>
     private void SetDestination() {
         Vector3 destination = new(transform.position.x + Random.Range(-5.0f, 5.0f), transform.position.y, transform.position.z + Random.Range(-5.0f, 5.0f));
         //Debug.Log(destination.sqrMagnitude);
+
+        Move(destination);
+    }
+
+    /// <summary>
+    /// 移動
+    /// </summary>
+    /// <param name="destination"></param>
+    private void Move(Vector3 destination) {
         tween = rb.DOMove(destination, moveTime).SetEase(Ease.InQuart).OnComplete(() => StartCoroutine(Wait()));
         transform.parent.DOLookAt(destination, 1.0f).SetEase(Ease.Linear);
         if (anim) {
-            anim.SetFloat("Speed", destination.normalized.sqrMagnitude);
+            anim.SetFloat(speedParam, destination.normalized.sqrMagnitude);
             //Debug.Log(destination.normalized.sqrMagnitude);
         }
     }
 
     /// <summary>
-    /// 待機
+    /// ??@
     /// </summary>
     /// <returns></returns>
     private IEnumerator Wait() {
-        anim.SetFloat("Speed", 0.0f);
-        float timer = 0;
-        if (timer < stateTime) {
-            timer += Time.deltaTime;
-            yield return null;
+        if (anim) {
+            anim.SetFloat(speedParam, 0.0f);
         }
+
         tween.Kill();
         tween = null;
 

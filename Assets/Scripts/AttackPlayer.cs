@@ -20,7 +20,7 @@ public class AttackPlayer : MonoBehaviour
         //TryGetComponent(out anim);
         TryGetComponent(out playerAnim);
 
-        // TODO CharaData ‚©‚ç–á‚¤
+        // TODO CharaData ã‹ã‚‰è²°ã†
         attackPower = UserData.instance != null ? UserData.instance.currentCharaData.attackPower : ConstData.DEFAULT_ATTACK_POWER;
     }
 
@@ -37,16 +37,16 @@ public class AttackPlayer : MonoBehaviour
 
     
     /// <summary>
-    /// AnimationEvent ‚©‚çÀs
-    /// ƒRƒ‰ƒCƒ_[‚ÆƒgƒŒƒCƒ‹‚ÌƒIƒ“ƒIƒtØ‚è‘Ö‚¦
+    /// AnimationEvent ã‹ã‚‰å®Ÿè¡Œ
+    /// ã‚³ãƒ©ã‚¤ãƒ€ãƒ¼ã¨ãƒˆãƒ¬ã‚¤ãƒ«ã®ã‚ªãƒ³ã‚ªãƒ•åˆ‡ã‚Šæ›¿ãˆ
     /// </summary>
     /// <param name="switchIndex"></param>
     private void SwitchWeaponCollider(int switchIndex) {
-        // ƒRƒ‰ƒCƒ_[ƒIƒ“ƒIƒtØ‚è‘Ö‚¦
+        // ã‚³ãƒ©ã‚¤ãƒ€ãƒ¼ã‚ªãƒ³ã‚ªãƒ•åˆ‡ã‚Šæ›¿ãˆ
         capsuleCol.enabled = switchIndex == 0 ? true : false;
         //Debug.Log(capsuleCol.enabled);
 
-        // ƒgƒŒƒCƒ‹ƒIƒ“ƒIƒtØ‚è‘Ö‚¦
+        // ãƒˆãƒ¬ã‚¤ãƒ«ã‚ªãƒ³ã‚ªãƒ•åˆ‡ã‚Šæ›¿ãˆ
         trailRenderer.enabled = switchIndex == 0 ? true : false;
     }
 
@@ -56,9 +56,14 @@ public class AttackPlayer : MonoBehaviour
             return;
         }
 
-        if (col.gameObject.TryGetComponent(out EnemyBase enemyBase)) {
-            enemyBase.PrepareCalcHp(-attackPower);
-            Debug.Log("UŒ‚ƒqƒbƒg");
+        // if (col.gameObject.TryGetComponent(out EnemyBase enemyBase)) {
+        //     enemyBase.PrepareCalcHp(-attackPower);
+        //     Debug.Log("æ”»æ’ƒãƒ’ãƒƒãƒˆ");
+        // }
+        
+        if (col.gameObject.TryGetComponent(out Health health)) {
+            health.TakeDamage(attackPower);
+            Debug.Log("æ”»æ’ƒãƒ’ãƒƒãƒˆ attackPower : " + attackPower);
         }
     }
 }

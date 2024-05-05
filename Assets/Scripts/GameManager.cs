@@ -1,20 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField]
+    [SerializeField, HideInInspector]
     private int maxEnemyGenerateCount;
 
-    [SerializeField]
+    [SerializeField, HideInInspector]
     private float generateInterval;
 
-    [SerializeField]
+    [SerializeField, HideInInspector]
     private int generateGemCount;
 
-    [SerializeField] 
-    private PlayerController playerChara;
+    [FormerlySerializedAs("playerChara")] [SerializeField] 
+    private PlayerController playerCharaPrefab;
     
     [SerializeField] 
     private Transform startTran;
@@ -42,16 +43,16 @@ public class GameManager : MonoBehaviour
         }
 
         UserData.instance.SetCurrentCharaData();
-        playerChara = Instantiate(DataBaseManager.instance.GetSkinData(UserData.instance.currentCharaData.id),
+        playerCharaPrefab = Instantiate(DataBaseManager.instance.GetSkinData(UserData.instance.currentCharaData.id),
             startTran.position, Quaternion.identity);
         
-        playerChara.SetUpPlayer(cameraController);
+        playerCharaPrefab.SetUpPlayer(cameraController);
         
-        cameraController.SetTarget(playerChara.gameObject);
+        cameraController.SetTarget(playerCharaPrefab.gameObject);
     }
 
     /// <summary>
-    /// �G�l�~�[�̐�������
+    /// ?G?l?~?[?????????
     /// </summary>
     /// <returns></returns>
     private IEnumerator PrepareGenerateEnemy() {
@@ -67,26 +68,26 @@ public class GameManager : MonoBehaviour
             }           
             yield return null;
         }
-        Debug.Log("�G�l�~�[�̐����I��");
+        Debug.Log("?G?l?~?[??????I??");
     }
 
     /// <summary>
-    /// �G�l�~�[�̓|���ꂽ�����Ď�
+    /// ?G?l?~?[??|???????????
     /// </summary>
     /// <returns></returns>
     private IEnumerator ObserveEnemyCount() {
 
         while (maxEnemyGenerateCount > destroyEnemyCount) {
 
-            // TODO �Q�[���X�e�[�g�ɂ��ꎞ��~�@�\��ǉ�
+            // TODO ?Q?[???X?e?[?g???????~?@?\????
 
             yield return null;
         }
-        Debug.Log("�Q�[���N���A");
+        Debug.Log("?Q?[???N???A");
     }
 
     /// <summary>
-    /// �G�l�~�[�̓|�����������Z
+    /// ?G?l?~?[??|???????????Z
     /// </summary>
     public void AddDestroyEnemyCount() {
         destroyEnemyCount++;
